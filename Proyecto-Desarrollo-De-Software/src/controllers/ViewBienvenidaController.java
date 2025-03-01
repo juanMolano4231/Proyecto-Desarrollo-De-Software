@@ -12,8 +12,8 @@ import views.ViewBienvenida;
  * @author Juan Jose Molano Franco
  */
 public class ViewBienvenidaController {
-    public String iniciarBienvenida() {
+    public String bienvenida() {
         ViewBienvenida bienvenida = new ViewBienvenida();
-        return bienvenida.iniciarBienvenida();
+        return bienvenida.bienvenida();
     }
 }
