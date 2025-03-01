@@ -44,7 +44,7 @@ public class Main {
                     System.out.println(ruta);
                     data = login_pidePin();
                     ruta = (String) data[0]; // ruta
-                    aux[2] = data[1]; // pin
+                    aux[1] = data[1]; // pin
                     break;
                 case "Login_PinInvalido":
                     System.out.println(ruta);
