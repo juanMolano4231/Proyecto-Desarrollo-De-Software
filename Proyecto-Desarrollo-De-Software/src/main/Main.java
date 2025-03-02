@@ -6,6 +6,7 @@
 package main;
 
 import controllers.ViewBienvenidaController;
+import controllers.ViewRegisterController;
 
 /**
  *
@@ -32,7 +33,6 @@ public class Main {
                     break;
               // ViewLogin
                 case "Login_pideNombreUsuario":
-                    System.out.println(ruta);
                     data = login_pideNombreUsuario();
                     ruta = (String) data[0]; // ruta
                     aux[0] = data[1]; // nombre de usuario
@@ -41,14 +41,35 @@ public class Main {
                     // implementar
                     break;
                 case "Login_pidePin":
-                    System.out.println(ruta);
                     data = login_pidePin();
                     ruta = (String) data[0]; // ruta
                     aux[1] = data[1]; // pin
                     break;
                 case "Login_PinInvalido":
-                    System.out.println(ruta);
                     ruta = login_pinInvalido();
+                    break;
+              // ViewRegister
+                case "Register_pideNombreUsuario":
+                    data = register_pideNombreUsuario();
+                    ruta = (String) data[0];
+                    aux[0] = data[1]; // Guarda nombre de usuario para registro
+                    break;
+                case "Register_usuarioInvalido":
+                    ruta = register_usuarioInvalido();
+                    break;
+                case "Register_usuarioOcupado":
+                    ruta = register_usuarioOcupado();
+                    break;
+                case "Register_pidePin":
+                    data = register_pidePin();
+                    ruta = (String) data[0];
+                    aux[1] = data[1]; // Guarda pin del usuario para registro
+                    break;
+                case "Register_pinInvalido":
+                    ruta = register_pinInvalido();
+                    break;
+                case "Login_exito":
+                    ruta = login_exito();
                     break;
                 default:
                     throw new Error ("No hay una ruta establecida para la ruta \"" 
@@ -99,5 +120,91 @@ public class Main {
     private static String login_pinInvalido() {
         // Llama al controlador de login y le pide abrir la ventana de ViewLogin pinInvalido
         return "Login_pidePin";
+    }
+    
+    // ViewRegister
+    private static Object[] register_pideNombreUsuario() {
+        ViewRegisterController controller = new ViewRegisterController();
+        String input = controller.pideNombreUsuario();
+        if (input == null) {
+            return new Object[]{"Bienvenida_bienvenida", null};
+        }
+        if (! nombreUsuarioValido(input)) {
+            return new Object[]{"Register_usuarioInvalido", null};
+        } else if (input.equals("juan1234")) {  // Usuario admin quemado
+            return new Object[]{"Register_usuarioOcupado", null};
+        } else {
+            return new Object[]{"Register_pidePin", input};
+        }
+    }
+    
+    private static String register_usuarioInvalido() {
+        ViewRegisterController controller = new ViewRegisterController();
+        int selection = controller.usuarioInvalido();
+        if (selection == 0) {  // Presiona OK
+            return "Register_pideNombreUsuario";
+        } else if (selection == 2 || selection == -1) {  // Presiona CANCEL o cierra la ventana
+            return "Bienvenida_bienvenida";
+        } else {
+            throw new Error("Seleccion \"" + selection + "\" sin ruta");
+        }
+    }
+    
+    private static String register_usuarioOcupado() {
+        ViewRegisterController controller = new ViewRegisterController();
+        int selection = controller.usuarioOcupado();
+        if (selection == 0) {  // Presiona OK
+            return "Register_pideNombreUsuario";
+        } else if (selection == 2 || selection == -1) {  // Presiona CANCEL o cierra la ventana
+            return "Bienvenida_bienvenida";
+        } else {
+            throw new Error("Seleccion \"" + selection + "\" sin ruta");
+        }
+    }
+    
+    private static Object[] register_pidePin() {
+        ViewRegisterController controller = new ViewRegisterController();
+        String input = controller.pidePin();
+        try {
+            Integer.parseInt(input);
+        } catch (Exception e) {
+            return new Object[]{"Register_pinInvalido", null};
+        }
+        return new Object[]{"Login_exito", input};
+    }
+    
+    private static String register_pinInvalido() {
+        ViewRegisterController controller = new ViewRegisterController();
+        int selection = controller.pinInvalido();
+        if (selection == 0) {  // Presiona OK
+            return "Register_pidePin";
+        } else if (selection == 2 || selection == -1) {  // Presiona CANCEL o cierra la ventana
+            return "Bienvenida_bienvenida";
+        } else {
+            throw new Error("Seleccion \"" + selection + "\" sin ruta");
+        }
+    }
+    
+    private static String login_exito() {
+        ViewRegisterController controller = new ViewRegisterController();
+        int selection = controller.exito();
+        if (selection == 0 || selection == 2 || selection == -1) {  // Presiona OK, CANCEL o cierra la ventana
+            return "Bienvenida_bienvenida";
+        } else {
+            throw new Error("Seleccion \"" + selection + "\" sin ruta");
+        }
+    }
+    
+    // Validaciones
+    private static boolean nombreUsuarioValido(String usu) {
+        if (usu == null || usu.isBlank()) {
+            return false;
+        }
+        for (int i = 0; i < usu.length(); i++) {
+            if (Character.isWhitespace(usu.charAt(i))) {
+                return false;
+            }
+        }
+        return true;
     }
 }
