@@ -138,8 +138,14 @@ public class Main {
 
     private static String login_usuarioNoEncontrado() {
         ViewLoginController controller = new ViewLoginController();
-        controller.usuarioNoEncontrado();
-        return "Login_pideNombreUsuario";
+        int selection = controller.usuarioNoEncontrado();
+        if (selection == 0) {
+            return "Login_pideNombreUsuario";
+        } else if (selection == 2 || selection == -1) {
+            return "Bienvenida_bienvenida";
+        } else {
+            throw new Error("Seleccion" + selection + "sin ruta");
+        }
     }
 
     private static Object[] login_pidePin() {
@@ -172,11 +178,21 @@ public class Main {
 
     private static String login_pinInvalido() {
         ViewLoginController controller = new ViewLoginController();
-        int selection = controller.pinIncorrecto();
+        int selection = controller.pinInvalido();
         if (selection == 0) {  // Presiona OK
             return "Login_pidePin";
         } else if (selection == 2 || selection == -1) {  // Presiona CANCEL o cierra la ventana
             return "Bienvenida_bienvenida";
+        } else {
+            throw new Error("Seleccion \"" + selection + "\" sin ruta");
+        }
+    }
+
+    private static String login_exito() {
+        ViewLoginController controller = new ViewLoginController();
+        int selection = controller.exito();
+        if (selection == 0 || selection == 2 || selection == -1) {  // Presiona OK, CANCEL o cierra la ventana
+            return "salida";
         } else {
             throw new Error("Seleccion \"" + selection + "\" sin ruta");
         }
@@ -250,16 +266,6 @@ public class Main {
         int selection = controller.exito();
         if (selection == 0 || selection == 2 || selection == -1) {  // Presiona OK, CANCEL o cierra la ventana
             return "Bienvenida_bienvenida";
-        } else {
-            throw new Error("Seleccion \"" + selection + "\" sin ruta");
-        }
-    }
-
-    private static String login_exito() {
-        ViewLoginController controller = new ViewLoginController();
-        int selection = controller.exito();
-        if (selection == 0 || selection == 2 || selection == -1) {  // Presiona OK, CANCEL o cierra la ventana
-            return "salida";
         } else {
             throw new Error("Seleccion \"" + selection + "\" sin ruta");
         }
