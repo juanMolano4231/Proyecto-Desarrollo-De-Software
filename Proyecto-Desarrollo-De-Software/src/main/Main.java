@@ -246,7 +246,7 @@ public class Main {
         } catch (Exception e) {
             return new Object[]{"Register_pinInvalido", null};
         }
-        return new Object[]{"Login_exito", input};
+        return new Object[]{"Register_exito", input};
     }
 
     private static String register_pinInvalido() {
