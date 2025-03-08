@@ -4,6 +4,7 @@
  */
 package main;
 
+import com.formdev.flatlaf.FlatLightLaf;
 import controllers.ViewBienvenidaController;
 import controllers.ViewLoginController;
 import controllers.ViewRegisterController;
@@ -15,6 +16,10 @@ import controllers.ViewRegisterController;
 public class Main {
 
     public static void main(String[] args) {
+        
+        /* Estilo default de FlatLightLaf */
+        FlatLightLaf.setup();
+        
         /* Guarda la ruta a la que se irá en la siguiente iteración del ciclo
         en cierta View y cierto Diálogo (cada método es un diálogo */
         String ruta = "Bienvenida_bienvenida";  // Ruta default, ViewBienvenida método bienvenida
