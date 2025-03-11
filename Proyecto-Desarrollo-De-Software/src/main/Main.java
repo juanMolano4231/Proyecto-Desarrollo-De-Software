@@ -14,12 +14,24 @@ import controllers.ViewRegisterController;
  * @author Juan Jose Molano Franco
  */
 public class Main {
+    
+    private static ViewBienvenidaController bienvenidaController = new ViewBienvenidaController();
+    private static ViewLoginController loginController = new ViewLoginController();
+    private static ViewRegisterController registerController = new ViewRegisterController();
 
     public static void main(String[] args) {
         
+        looksAndFeelSetup();
+        iniciarRouting();
+    }
+
+    private static void looksAndFeelSetup() {
         /* Estilo default de FlatLightLaf */
         FlatLightLaf.setup();
-        
+    }
+    
+    private static void iniciarRouting() {
+            
         /* Guarda la ruta a la que se irá en la siguiente iteración del ciclo
         en cierta View y cierto Diálogo (cada método es un diálogo */
         String ruta = "Bienvenida_bienvenida";  // Ruta default, ViewBienvenida método bienvenida
@@ -95,197 +107,61 @@ public class Main {
 
     // ViewBienvenida
     private static String bienvenida_bienvenida() {
-        ViewBienvenidaController controller = new ViewBienvenidaController();
-        String selection = controller.bienvenida();
-        if (selection == null) {
-            return "salida";
-        }
-        switch (selection) {
-            case "Cerrar":
-                return "salida";
-            case "Iniciar sesión":
-                return "Login_pideNombreUsuario";
-            case "Registrarse":
-                return "Register_pideNombreUsuario";
-            default:
-                throw new Error("No hay una ruta establecida para seleccion \""
-                        + selection + "\"");
-        }
+        return bienvenidaController.bienvenida();
     }
 
     //ViewLogin
     private static Object[] login_pideNombreUsuario() {
-        ViewLoginController controller = new ViewLoginController();
-        String input = controller.pideNombreUsuario();
-        if (input == null) {
-            return new Object[]{"Bienvenida_bienvenida", null};
-        }
-        if (!nombreUsuarioValido(input)) {
-            return new Object[]{"Login_usuarioInvalido", null};
-        } else if (input.equals("juan1234")) {
-            return new Object[]{"Login_pidePin", input};
-        } else {
-            return new Object[]{"Login_usuarioNoEncontrado", null};
-        }
+        return loginController.pideNombreUsuario();
     }
 
     private static String login_usuarioInvalido() {
-        ViewLoginController controller = new ViewLoginController();
-        int selection = controller.usuarioInvalido();
-        if (selection == 0) {
-            return "Login_pideNombreUsuario";
-        } else if (selection == 2 || selection == -1) {
-            return "Bienvenida_bienvenida";
-        } else {
-            throw new Error("Seleccion" + selection + "sin ruta");
-        }
+        return loginController.usuarioInvalido();
     }
 
     private static String login_usuarioNoEncontrado() {
-        ViewLoginController controller = new ViewLoginController();
-        int selection = controller.usuarioNoEncontrado();
-        if (selection == 0) {
-            return "Login_pideNombreUsuario";
-        } else if (selection == 2 || selection == -1) {
-            return "Bienvenida_bienvenida";
-        } else {
-            throw new Error("Seleccion" + selection + "sin ruta");
-        }
+        return loginController.usuarioNoEncontrado();
     }
 
     private static Object[] login_pidePin() {
-        ViewLoginController controller = new ViewLoginController();
-        String input = controller.pidePin();
-        int pin = -1;
-        try {
-            pin = Integer.parseInt(input);
-        } catch (NumberFormatException e) {
-            return new Object[]{"Login_pinInvalido", null};
-        }
-        if (pin == 1234) {
-            return new Object[]{"Login_exito", null};
-        } else {
-            return new Object[]{"Login_pinIncorrecto", null};
-        }
+        return loginController.pidePin();
     }
 
     private static String login_pinIncorrecto() {
-        ViewLoginController controller = new ViewLoginController();
-        int selection = controller.pinIncorrecto();
-        if (selection == 0) {  // Presiona OK
-            return "Login_pidePin";
-        } else if (selection == 2 || selection == -1) {  // Presiona CANCEL o cierra la ventana
-            return "Bienvenida_bienvenida";
-        } else {
-            throw new Error("Seleccion \"" + selection + "\" sin ruta");
-        }
+        return loginController.pinIncorrecto();
     }
 
     private static String login_pinInvalido() {
-        ViewLoginController controller = new ViewLoginController();
-        int selection = controller.pinInvalido();
-        if (selection == 0) {  // Presiona OK
-            return "Login_pidePin";
-        } else if (selection == 2 || selection == -1) {  // Presiona CANCEL o cierra la ventana
-            return "Bienvenida_bienvenida";
-        } else {
-            throw new Error("Seleccion \"" + selection + "\" sin ruta");
-        }
+        return loginController.pinInvalido();
     }
 
     private static String login_exito() {
-        ViewLoginController controller = new ViewLoginController();
-        int selection = controller.exito();
-        if (selection == 0 || selection == 2 || selection == -1) {  // Presiona OK, CANCEL o cierra la ventana
-            return "salida";
-        } else {
-            throw new Error("Seleccion \"" + selection + "\" sin ruta");
-        }
+        return loginController.exito();
     }
 
     // ViewRegister
     private static Object[] register_pideNombreUsuario() {
-        ViewRegisterController controller = new ViewRegisterController();
-        String input = controller.pideNombreUsuario();
-        if (input == null) {
-            return new Object[]{"Bienvenida_bienvenida", null};
-        }
-        if (!nombreUsuarioValido(input)) {
-            return new Object[]{"Register_usuarioInvalido", null};
-        } else if (input.equals("juan1234")) {  // Usuario admin quemado
-            return new Object[]{"Register_usuarioOcupado", null};
-        } else {
-            return new Object[]{"Register_pidePin", input};
-        }
+        return registerController.pideNombreUsuario();
     }
 
     private static String register_usuarioInvalido() {
-        ViewRegisterController controller = new ViewRegisterController();
-        int selection = controller.usuarioInvalido();
-        if (selection == 0) {  // Presiona OK
-            return "Register_pideNombreUsuario";
-        } else if (selection == 2 || selection == -1) {  // Presiona CANCEL o cierra la ventana
-            return "Bienvenida_bienvenida";
-        } else {
-            throw new Error("Seleccion \"" + selection + "\" sin ruta");
-        }
+        return registerController.usuarioInvalido();
     }
 
     private static String register_usuarioOcupado() {
-        ViewRegisterController controller = new ViewRegisterController();
-        int selection = controller.usuarioOcupado();
-        if (selection == 0) {  // Presiona OK
-            return "Register_pideNombreUsuario";
-        } else if (selection == 2 || selection == -1) {  // Presiona CANCEL o cierra la ventana
-            return "Bienvenida_bienvenida";
-        } else {
-            throw new Error("Seleccion \"" + selection + "\" sin ruta");
-        }
+        return registerController.usuarioOcupado();
     }
 
     private static Object[] register_pidePin() {
-        ViewRegisterController controller = new ViewRegisterController();
-        String input = controller.pidePin();
-        try {
-            Integer.parseInt(input);
-        } catch (Exception e) {
-            return new Object[]{"Register_pinInvalido", null};
-        }
-        return new Object[]{"Register_exito", input};
+        return registerController.pidePin();
     }
 
     private static String register_pinInvalido() {
-        ViewRegisterController controller = new ViewRegisterController();
-        int selection = controller.pinInvalido();
-        if (selection == 0) {  // Presiona OK
-            return "Register_pidePin";
-        } else if (selection == 2 || selection == -1) {  // Presiona CANCEL o cierra la ventana
-            return "Bienvenida_bienvenida";
-        } else {
-            throw new Error("Seleccion \"" + selection + "\" sin ruta");
-        }
+        return registerController.pinInvalido();
     }
 
     private static String register_exito() {
-        ViewRegisterController controller = new ViewRegisterController();
-        int selection = controller.exito();
-        if (selection == 0 || selection == 2 || selection == -1) {  // Presiona OK, CANCEL o cierra la ventana
-            return "Bienvenida_bienvenida";
-        } else {
-            throw new Error("Seleccion \"" + selection + "\" sin ruta");
-        }
+        return registerController.exito();
     }
 
-    // Validaciones
-    private static boolean nombreUsuarioValido(String usu) {
-        if (usu == null || usu.isBlank()) {
-            return false;
-        }
-        for (int i = 0; i < usu.length(); i++) {
-            if (Character.isWhitespace(usu.charAt(i))) {
-                return false;
-            }
-        }
-        return true;
-    }
 }

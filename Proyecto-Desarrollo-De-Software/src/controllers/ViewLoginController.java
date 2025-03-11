@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package controllers;
+import services.ViewLoginService;
 import views.ViewLogin;
 
 /**
@@ -10,38 +11,38 @@ import views.ViewLogin;
  * @author johan
  */
 public class ViewLoginController {
-        public String pideNombreUsuario() {
-        ViewLogin login = new ViewLogin();
-        return login.pideNombreUsuario();
+    
+    private ViewLoginService service;
+    
+    public ViewLoginController() {
+        this.service = new ViewLoginService();
     }
     
-    public int usuarioInvalido() {
-        ViewLogin login = new ViewLogin();
-        return login.usuarioInvalido();
+    public Object[] pideNombreUsuario() {
+        return service.pideNombreUsuario();
     }
     
-    public int usuarioNoEncontrado() {
-        ViewLogin login = new ViewLogin();
-        return login.usuarioNoEncontrado();
+    public String usuarioInvalido() {
+        return service.usuarioInvalido();
     }
     
-    public String pidePin() {
-        ViewLogin login = new ViewLogin();
-        return login.pidePin();
+    public String usuarioNoEncontrado() {
+        return service.usuarioNoEncontrado();
     }
     
-    public int pinIncorrecto() {
-        ViewLogin login = new ViewLogin();
-        return login.pinIncorrecto();
+    public Object[] pidePin() {
+        return service.pidePin();
     }
     
-    public int pinInvalido() {
-        ViewLogin login = new ViewLogin();
-        return login.pinInvalido();
+    public String pinIncorrecto() {
+        return service.pinIncorrecto();
     }
     
-    public int exito() {
-        ViewLogin login = new ViewLogin();
-        return login.exito();
+    public String pinInvalido() {
+        return service.pinInvalido();
+    }
+    
+    public String exito() {
+        return service.exito();
     }
 }
