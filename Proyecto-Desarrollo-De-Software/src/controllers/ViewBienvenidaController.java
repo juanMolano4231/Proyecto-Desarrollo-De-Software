@@ -5,6 +5,7 @@
 
 package controllers;
 
+import services.ViewBienvenidaService;
 import views.ViewBienvenida;
 
 /**
@@ -12,8 +13,14 @@ import views.ViewBienvenida;
  * @author Juan Jose Molano Franco
  */
 public class ViewBienvenidaController {
+    
+    private ViewBienvenidaService service;
+    
+    public ViewBienvenidaController() {
+        this.service = new ViewBienvenidaService();
+    }
+    
     public String bienvenida() {
-        ViewBienvenida bienvenida = new ViewBienvenida();
-        return bienvenida.bienvenida();
+        return service.bienvenida();
     }
 }

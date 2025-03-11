@@ -5,6 +5,7 @@
 
 package controllers;
 
+import services.ViewRegisterService;
 import views.ViewRegister;
 
 /**
@@ -12,33 +13,34 @@ import views.ViewRegister;
  * @author Juan Jose Molano Franco
  */
 public class ViewRegisterController {
-    public String pideNombreUsuario() {
-        ViewRegister register = new ViewRegister();
-        return register.pideNombreUsuario();
+    
+    private ViewRegisterService service;
+    
+    public ViewRegisterController() {
+        this.service = new ViewRegisterService();
     }
     
-    public int usuarioInvalido() {
-        ViewRegister register = new ViewRegister();
-        return register.usuarioInvalido();
+    public Object[] pideNombreUsuario() {
+        return service.pideNombreUsuario();
     }
     
-    public int usuarioOcupado() {
-        ViewRegister register = new ViewRegister();
-        return register.usuarioOcupado();
+    public String usuarioInvalido() {
+        return service.usuarioInvalido();
     }
     
-    public String pidePin() {
-        ViewRegister register = new ViewRegister();
-        return register.pidePin();
+    public String usuarioOcupado() {
+        return service.usuarioOcupado();
     }
     
-    public int pinInvalido() {
-        ViewRegister register = new ViewRegister();
-        return register.pinInvalido();
+    public Object[] pidePin() {
+        return service.pidePin();
     }
     
-    public int exito() {
-        ViewRegister register = new ViewRegister();
-        return register.exito();
+    public String pinInvalido() {
+        return service.pinInvalido();
+    }
+    
+    public String exito() {
+        return service.exito();
     }
 }
