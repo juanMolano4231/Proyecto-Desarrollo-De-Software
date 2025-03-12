@@ -5,9 +5,7 @@
 package main;
 
 import com.formdev.flatlaf.FlatLightLaf;
-import controllers.ViewBienvenidaController;
-import controllers.ViewLoginController;
-import controllers.ViewRegisterController;
+import controllers.*;
 
 /**
  *
@@ -15,6 +13,7 @@ import controllers.ViewRegisterController;
  */
 public class Main {
     
+    private static ViewTestController testController = new ViewTestController();
     private static ViewBienvenidaController bienvenidaController = new ViewBienvenidaController();
     private static ViewLoginController loginController = new ViewLoginController();
     private static ViewRegisterController registerController = new ViewRegisterController();
@@ -42,6 +41,11 @@ public class Main {
         Object[] data;
         while (true) {
             switch (ruta) {
+                // Test
+                case "Test_botones":
+                    ruta = test_botones();
+                    System.out.println(ruta);
+                    break;
                 // Salida
                 case "salida":
                     System.exit(0);
@@ -103,6 +107,11 @@ public class Main {
                             + ruta + "\"");
             }
         }
+    }
+    
+    // Testing
+    public static String test_botones() {
+        return testController.botones();
     }
 
     // ViewBienvenida
