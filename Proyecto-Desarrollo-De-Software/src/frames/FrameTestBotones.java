@@ -6,7 +6,7 @@ package frames;
 
 /**
  *
- * @author Usuario
+ * @author Juan José Molano Franco
  */
 public class FrameTestBotones extends javax.swing.JFrame {
     
