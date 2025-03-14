@@ -4,13 +4,18 @@
  */
 package frames;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+import javax.swing.JFrame;
+
 /**
  *
  * @author Juan José Molano Franco
  */
 public class FrameTestBotones extends javax.swing.JFrame {
     
-    private int seleccion = -1;
+    private int seleccion = -1;  // Valor default, preferiblemente un número negativo
 
     /**
      * Creates new form FrameTestBotones
@@ -18,6 +23,10 @@ public class FrameTestBotones extends javax.swing.JFrame {
     public FrameTestBotones() {
         initComponents();
         setLocationRelativeTo(null);
+        // Esto se hace para poder detectar cuando la ventana se cierra con un listener
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        // Aquí se hace el setup thel windowlistener
+        AgregarWindowListener();
     }
     
     public int getSeleccion() {
@@ -85,8 +94,24 @@ public class FrameTestBotones extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /* Se crea un WindowListener el cual tiene un método windowClosing que se va
+    a correr cuando la ventana se cierre. Dentro del cuerpo de dicho método va
+    la reasignación del parámetro de selección. Luego se añade el WindowListener
+    a este JFrame*/
+     public void AgregarWindowListener() {
+        WindowListener exitListener = new WindowAdapter() {
+
+            @Override
+            public void windowClosing(WindowEvent e) {
+                seleccion = 0;  // Marca que se cerró la ventana
+            }
+        };
+        addWindowListener(exitListener);
+    }
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.seleccion = 1;
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -98,4 +123,5 @@ public class FrameTestBotones extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
+
 }
