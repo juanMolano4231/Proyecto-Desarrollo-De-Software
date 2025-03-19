@@ -6,7 +6,6 @@
 package controllers;
 
 import services.ViewRegisterService;
-import views.ViewRegister;
 
 /**
  *
@@ -14,7 +13,7 @@ import views.ViewRegister;
  */
 public class ViewRegisterController {
     
-    private ViewRegisterService service;
+    private final ViewRegisterService service;
     
     public ViewRegisterController() {
         this.service = new ViewRegisterService();

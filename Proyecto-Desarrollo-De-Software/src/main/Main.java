@@ -6,7 +6,6 @@ package main;
 
 import com.formdev.flatlaf.FlatLightLaf;
 import controllers.*;
-import frames.FrameTestBotones;
 
 /**
  *
@@ -14,10 +13,10 @@ import frames.FrameTestBotones;
  */
 public class Main {
     
-    private static ViewTestController testController = new ViewTestController();
-    private static ViewBienvenidaController bienvenidaController = new ViewBienvenidaController();
-    private static ViewLoginController loginController = new ViewLoginController();
-    private static ViewRegisterController registerController = new ViewRegisterController();
+    private static final ViewTestController testController = new ViewTestController();
+    private static final ViewBienvenidaController bienvenidaController = new ViewBienvenidaController();
+    private static final ViewLoginController loginController = new ViewLoginController();
+    private static final ViewRegisterController registerController = new ViewRegisterController();
 
     public static void main(String[] args) {
         
@@ -34,7 +33,7 @@ public class Main {
             
         /* Guarda la ruta a la que se irá en la siguiente iteración del ciclo
         en cierta View y cierto Diálogo (cada método es un diálogo */
-        String ruta = "Test_botones";  // Ruta default, ViewBienvenida método bienvenida
+        String ruta = "Bienvenida_bienvenida";  // Ruta default, ViewBienvenida método bienvenida
         /* Guarda toda la data que se va a pasar entre diálogos y views
         Se puede incrementar el tamaño del array si es necesario */
         Object[] aux = new Object[16];

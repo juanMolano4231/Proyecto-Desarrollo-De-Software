@@ -13,7 +13,7 @@ import services.ViewTestService;
  */
 public class ViewTestController {
     
-    private ViewTestService service;
+    private final ViewTestService service;
     
     public ViewTestController() {
         this.service = new ViewTestService();

@@ -6,7 +6,6 @@
 package controllers;
 
 import services.ViewBienvenidaService;
-import views.ViewBienvenida;
 
 /**
  *
@@ -14,7 +13,7 @@ import views.ViewBienvenida;
  */
 public class ViewBienvenidaController {
     
-    private ViewBienvenidaService service;
+    private final ViewBienvenidaService service;
     
     public ViewBienvenidaController() {
         this.service = new ViewBienvenidaService();

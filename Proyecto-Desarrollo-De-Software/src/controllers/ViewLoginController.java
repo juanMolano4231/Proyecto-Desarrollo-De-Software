@@ -4,7 +4,6 @@
  */
 package controllers;
 import services.ViewLoginService;
-import views.ViewLogin;
 
 /**
  *
@@ -12,7 +11,7 @@ import views.ViewLogin;
  */
 public class ViewLoginController {
     
-    private ViewLoginService service;
+    private final ViewLoginService service;
     
     public ViewLoginController() {
         this.service = new ViewLoginService();

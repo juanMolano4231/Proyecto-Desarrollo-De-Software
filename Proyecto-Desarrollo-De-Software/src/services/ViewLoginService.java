@@ -5,7 +5,6 @@
 
 package services;
 
-import controllers.ViewLoginController;
 import views.ViewLogin;
 
 /**
@@ -14,8 +13,9 @@ import views.ViewLogin;
  */
 public class ViewLoginService {
     
+    private final ViewLogin login = new ViewLogin();
+    
     public Object[] pideNombreUsuario() {
-        ViewLogin login = new ViewLogin();
         String input = login.pideNombreUsuario();
         
         if (input == null) {
@@ -31,7 +31,6 @@ public class ViewLoginService {
     }
     
     public String usuarioInvalido() {
-        ViewLogin login = new ViewLogin();
         int selection = login.usuarioInvalido();
         if (selection == 0) {
             return "Login_pideNombreUsuario";
@@ -43,7 +42,6 @@ public class ViewLoginService {
     }
     
     public String usuarioNoEncontrado() {
-        ViewLogin login = new ViewLogin();
         int selection = login.usuarioNoEncontrado();
         if (selection == 0) {
             return "Login_pideNombreUsuario";
@@ -55,7 +53,6 @@ public class ViewLoginService {
     }
     
     public Object[] pidePin() {
-        ViewLogin login = new ViewLogin();
         String input = login.pidePin();
         if (input == null) {
             return new Object[]{"Bienvenida_bienvenida", null};
@@ -74,7 +71,6 @@ public class ViewLoginService {
     }
     
     public String pinIncorrecto() {
-        ViewLogin login = new ViewLogin();
         int selection = login.pinIncorrecto();
         if (selection == 0) {  // Presiona OK
             return "Login_pidePin";
@@ -86,7 +82,6 @@ public class ViewLoginService {
     }
     
     public String pinInvalido() {
-        ViewLogin login = new ViewLogin();
         int selection = login.pinInvalido();
         if (selection == 0) {  // Presiona OK
             return "Login_pidePin";
@@ -98,7 +93,6 @@ public class ViewLoginService {
     }
     
     public String exito() {
-        ViewLogin login = new ViewLogin();
         int selection = login.exito();
         if (selection == 0 || selection == 2 || selection == -1) {  // Presiona OK, CANCEL o cierra la ventana
             return "salida";

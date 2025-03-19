@@ -13,7 +13,7 @@ import views.ViewRegister;
  */
 public class ViewRegisterService {
     
-    private ViewRegister register;
+    private final ViewRegister register;
     
     public ViewRegisterService() {
         this.register = new ViewRegister();

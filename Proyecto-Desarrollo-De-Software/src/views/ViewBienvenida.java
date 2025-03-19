@@ -13,7 +13,7 @@ import javax.swing.*;
  */
 public class ViewBienvenida {
     
-    public static String bienvenida() {
+    public String bienvenida() {
         String[] options = { "Cerrar", "Iniciar sesión", "Registrarse" };
         String message = "Bienvenido al sistema de gestión de cine. Por favor eliga una opción:";
         
