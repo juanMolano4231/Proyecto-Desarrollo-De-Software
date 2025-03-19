@@ -17,6 +17,7 @@ public class Main {
     private static final ViewBienvenidaController bienvenidaController = new ViewBienvenidaController();
     private static final ViewLoginController loginController = new ViewLoginController();
     private static final ViewRegisterController registerController = new ViewRegisterController();
+    private static final ViewGestionCineController gestionCineController = new ViewGestionCineController();
 
     public static void main(String[] args) {
         
@@ -37,6 +38,8 @@ public class Main {
         /* Guarda toda la data que se va a pasar entre diálogos y views
         Se puede incrementar el tamaño del array si es necesario */
         Object[] aux = new Object[16];
+        // Auxiliares
+        int salaSeleccionada = -1;
         /* Para cargar la data de los métodos y usarla, siempre se sobrescribe */
         Object[] data;
         while (true) {
@@ -101,8 +104,14 @@ public class Main {
                 case "Register_exito":
                     ruta = register_exito();
                     break;
+                // ViewGestionCine
+                case "GestionCine_verSalas":
+                    data = gestionCine_verSalas();
+                    ruta = (String) data[0];
+                    salaSeleccionada = (int) data[1];  // Guarda sala seleccionada para gestionar
+                    break;
                 default:
-                    throw new Error("No hay una ruta establecida para la ruta \""
+                    throw new Error("No hay una ruta implementada para la ruta \""
                             + ruta + "\"");
             }
         }
@@ -118,7 +127,7 @@ public class Main {
         return bienvenidaController.bienvenida();
     }
 
-    //ViewLogin
+    // ViewLogin
     private static Object[] login_pideNombreUsuario() {
         return loginController.pideNombreUsuario();
     }
@@ -170,6 +179,11 @@ public class Main {
 
     private static String register_exito() {
         return registerController.exito();
+    }
+    
+    // ViewGestionCine
+    private static Object[] gestionCine_verSalas() {
+        return gestionCineController.verSalas();
     }
 
 }

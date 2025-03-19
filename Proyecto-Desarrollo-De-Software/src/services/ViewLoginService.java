@@ -94,8 +94,10 @@ public class ViewLoginService {
     
     public String exito() {
         int selection = login.exito();
-        if (selection == 0 || selection == 2 || selection == -1) {  // Presiona OK, CANCEL o cierra la ventana
-            return "salida";
+        if (selection == 0) {  // Presiona OK
+            return "GestionCine_verSalas";
+        } else if (selection == 2 || selection == -1) {  // Presiona CANCEL o cierra la ventana
+            return "Bienvenida_bienvenida";
         } else {
             throw new Error("Seleccion \"" + selection + "\" sin ruta");
         }
