@@ -4,30 +4,43 @@
  */
 package services;
 
-import views.ViewBienvenida;
+import frames.FrameBienvenida;
+import java.util.concurrent.TimeUnit;
 
 /**
  *
  * @author Juan José Molano Franco
  */
 public class ViewBienvenidaService {
-    
+
     public String bienvenida() {
-        ViewBienvenida bienvenida = new ViewBienvenida();
-        String selection = bienvenida.bienvenida();
-        if (selection == null) {
-            return "salida";
-        }
-        switch (selection) {
-            case "Cerrar":
-                return "salida";
-            case "Iniciar sesión":
-                return "Login_pideNombreUsuario";
-            case "Registrarse":
-                return "Register_pideNombreUsuario";
-            default:
-                throw new Error("No hay una ruta establecida para seleccion \""
-                        + selection + "\"");
+        FrameBienvenida frame = new FrameBienvenida();
+        frame.setVisible(true);
+
+        /* Este ciclo revisa cada 250ms si el usuario ya clickeó un botón.
+        En caso de que no espera otros 250ms, pero si sí entonces toma la ruta */
+        while (true) {
+            int seleccion = frame.getSeleccion();
+            switch (seleccion) {
+                case 0:  // Se cierra el frame con la X
+                case 1:  // Cerrar
+                    frame.dispose();
+                    return "salida";
+                case 2:  // Iniciar sesión
+                    frame.dispose();
+                    return "Login_pideNombreUsuario";
+                case 3:  // Iniciar sesión
+                    frame.dispose();
+                    return "Register_pideNombreUsuario";
+                default:  // Valor default, preferiblemente un número negativo
+                    // Detiene el ciclo por 250 ms
+                    try {
+                        TimeUnit.MILLISECONDS.sleep(250);
+                    } catch (InterruptedException ie) {
+                        Thread.currentThread().interrupt();
+                    }
+                    break;
+            }
         }
     }
 }
