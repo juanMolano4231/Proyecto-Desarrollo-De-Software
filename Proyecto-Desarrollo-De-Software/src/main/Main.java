@@ -35,10 +35,11 @@ public class Main {
         /* Guarda la ruta a la que se irá en la siguiente iteración del ciclo
         en cierta View y cierto Diálogo (cada método es un diálogo */
         String ruta = "Bienvenida_bienvenida";  // Ruta default, ViewBienvenida método bienvenida
-        /* Guarda toda la data que se va a pasar entre diálogos y views
-        Se puede incrementar el tamaño del array si es necesario */
-        Object[] aux = new Object[16];
         // Auxiliares
+        String nombreUsuarioLogin = null;
+        String pinLogin = null;
+        String nombreUsuarioRegistro = null;
+        String pinRegistro = null;
         int salaSeleccionada = -1;
         /* Para cargar la data de los métodos y usarla, siempre se sobrescribe */
         Object[] data;
@@ -59,7 +60,7 @@ public class Main {
                 case "Login_pideNombreUsuario":
                     data = login_pideNombreUsuario();
                     ruta = (String) data[0]; // ruta
-                    aux[0] = data[1]; // nombre de usuario
+                    nombreUsuarioLogin = (String) data[1]; // nombre de usuario
                     break;
                 case "Login_usuarioInvalido":
                     ruta = login_usuarioInvalido();
@@ -70,7 +71,7 @@ public class Main {
                 case "Login_pidePin":
                     data = login_pidePin();
                     ruta = (String) data[0]; // ruta
-                    aux[1] = data[1]; // pin
+                    pinLogin = String.valueOf(data[1]); // pin
                     break;
                 case "Login_pinIncorrecto":
                     ruta = login_pinIncorrecto();
@@ -85,7 +86,7 @@ public class Main {
                 case "Register_pideNombreUsuario":
                     data = register_pideNombreUsuario();
                     ruta = (String) data[0];
-                    aux[0] = data[1]; // Guarda nombre de usuario para registro
+                    nombreUsuarioRegistro = (String) data[1]; // Guarda nombre de usuario para registro
                     break;
                 case "Register_usuarioInvalido":
                     ruta = register_usuarioInvalido();
@@ -96,7 +97,7 @@ public class Main {
                 case "Register_pidePin":
                     data = register_pidePin();
                     ruta = (String) data[0];
-                    aux[1] = data[1]; // Guarda pin del usuario para registro
+                    pinRegistro = (String) data[1]; // Guarda pin del usuario para registro
                     break;
                 case "Register_pinInvalido":
                     ruta = register_pinInvalido();
